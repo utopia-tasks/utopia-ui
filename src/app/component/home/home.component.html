@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <form class="example-form">
+        <mat-form-field class="full-width">
+          <mat-label>Enter a To Do</mat-label>
+          <input matInput [(ngModel)]="toDoText" name="addToDo" autocomplete="off">
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="col-md-4">
+      <button mat-raised-button color="primary" (click)="addToDo()">Add</button>
+    </div>
+  </div>
+</div>
+<mat-accordion *ngIf="loading == false">
+  <mat-expansion-panel *ngFor="let todo of toDos">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <button mat-mini-fab color="primary" *ngIf="todo.fields.isStarred == true" (click)="updateIsStarred(todo, $event)" class="button"
+                aria-label="Example icon button with a menu icon">
+          <mat-icon>star</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="todo.fields.isStarred != true" (click)="updateIsStarred(todo, $event)" class="button"
+                aria-label="Example icon button with a menu icon">
+          <mat-icon>star_border</mat-icon>
+        </button>
+        <button mat-icon-button (click)="updateIsCompleted(todo, $event)" class="button"
+                aria-label="Example icon button with a menu icon">
+          <mat-icon *ngIf="todo.fields.isCompleted == true">check_box</mat-icon>
+          <mat-icon *ngIf="todo.fields.isCompleted != true">check_box_outline_blank</mat-icon>
+        </button>
+        <div class="todo-title">
+          <s *ngIf="todo.fields.isCompleted == true">{{todo.fields.Title}}</s>
+          <p *ngIf="todo.fields.isCompleted != true">{{todo.fields.Title}}</p>
+        </div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>{{todo.fields.ID}}</p>
+  </mat-expansion-panel>
+</mat-accordion>

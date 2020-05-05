@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {TodosService} from '../../service/todos/todos.service';
-import {Todo} from '../../entity/todo';
-import {finalize} from 'rxjs/internal/operators'; 'rxjs/add/operator/finally';
+import { TodosService } from '../../service/todos/todos.service';
+import { Todo } from '../../entity/todo';
+import { finalize } from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-home',

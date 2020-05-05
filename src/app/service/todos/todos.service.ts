@@ -11,7 +11,7 @@ export class TodosService {
 
   getToDos(): Observable<Record> {
     const headers = new HttpHeaders().set('Authorization', 'Bearer keyzO7sPzMIG0WmZx');
-    return this.http.get<Record>('https://api.airtable.com/v0/app9S2ylfAtMmdNC4/Table%201?maxRecords=100&view=Grid%20view', { headers: headers });
+    return this.http.get<Record>('https://api.airtable.com/v0/app9S2ylfAtMmdNC4/Table%201?maxRecords=100&view=Grid%20view', { headers });
   }
 
   updateToDos(toDos: Todo[]): Observable<Record> {
@@ -19,7 +19,7 @@ export class TodosService {
       .set('Authorization', 'Bearer keyzO7sPzMIG0WmZx')
       .set('Content-Type', 'application/json');
 
-    return this.http.patch<Record>('https://api.airtable.com/v0/app9S2ylfAtMmdNC4/Table%201', this.convertToJSON(toDos), { headers: headers });
+    return this.http.patch<Record>('https://api.airtable.com/v0/app9S2ylfAtMmdNC4/Table%201', this.convertToJSON(toDos), { headers });
   }
 
   addToDos(toDos: Todo[]): Observable<Record> {
@@ -27,11 +27,11 @@ export class TodosService {
       .set('Authorization', 'Bearer keyzO7sPzMIG0WmZx')
       .set('Content-Type', 'application/json');
 
-    return this.http.post<Record>('https://api.airtable.com/v0/app9S2ylfAtMmdNC4/Table%201', this.convertToJSON(toDos), { headers: headers });
+    return this.http.post<Record>('https://api.airtable.com/v0/app9S2ylfAtMmdNC4/Table%201', this.convertToJSON(toDos), { headers });
   }
 
   convertToJSON(toDos: Todo[]): string {
-    let body = new Record();
+    const body = new Record();
     body.records = [];
 
     toDos.forEach(toDo => {

@@ -9,3 +9,8 @@
 .full-width {
   width: 100%;
 }
+
+.footer-buttons {
+  text-align: left;
+  display: block;
+}

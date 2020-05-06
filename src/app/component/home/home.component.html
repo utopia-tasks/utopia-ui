@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8">
-      <form class="example-form">
+      <form class="example-form" (keyup.enter)="addToDo(toDoText)">
         <mat-form-field class="full-width">
           <mat-label>Enter a To Do</mat-label>
           <input matInput [(ngModel)]="toDoText" name="addToDo" autocomplete="off">
@@ -9,7 +9,7 @@
       </form>
     </div>
     <div class="col-md-4">
-      <button mat-raised-button color="primary" (click)="addToDo()">Add</button>
+      <button mat-raised-button color="primary" (click)="addToDo(toDoText)">Add</button>
     </div>
   </div>
 </div>
@@ -36,6 +36,12 @@
         </div>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <p>{{todo.fields.ID}}</p>
+    <p>{{todo.id}}</p>
+    <mat-action-row class="footer-buttons">
+      <button mat-icon-button class="button" (click)="duplicateToDo(todo)"
+              aria-label="Example icon button with a menu icon">
+        <mat-icon>library_add_check</mat-icon>
+      </button>
+    </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>

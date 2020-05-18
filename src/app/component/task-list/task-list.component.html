@@ -1,0 +1,32 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let todo of toDos">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <button mat-mini-fab color="primary" *ngIf="todo.fields.isStarred == true" (click)="updateIsStarred(todo, $event)" class="button"
+                aria-label="Example icon button with a menu icon">
+          <mat-icon>star</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="todo.fields.isStarred != true" (click)="updateIsStarred(todo, $event)" class="button"
+                aria-label="Example icon button with a menu icon">
+          <mat-icon>star_border</mat-icon>
+        </button>
+        <button mat-icon-button (click)="updateIsCompleted(todo, $event)" class="button"
+                aria-label="Example icon button with a menu icon">
+          <mat-icon *ngIf="todo.fields.isCompleted == true">check_box</mat-icon>
+          <mat-icon *ngIf="todo.fields.isCompleted != true">check_box_outline_blank</mat-icon>
+        </button>
+        <div class="todo-title">
+          <s *ngIf="todo.fields.isCompleted == true">{{todo.fields.Title}}</s>
+          <p *ngIf="todo.fields.isCompleted != true">{{todo.fields.Title}}</p>
+        </div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>{{todo.createdTime}}</p>
+    <mat-action-row class="footer-buttons">
+      <button mat-icon-button class="button" (click)="duplicateToDo(todo)"
+              aria-label="Example icon button with a menu icon">
+        <mat-icon>library_add_check</mat-icon>
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

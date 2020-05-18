@@ -1,5 +1,6 @@
 export class Todo {
   id?: string;
+  createdTime?: string;
   fields: {
     Title?: string;
     isStarred?: boolean;

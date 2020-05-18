@@ -16,11 +16,18 @@ import { TodosService } from './service/todos/todos.service';
 import { MatListModule } from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatNativeDateModule} from '@angular/material/core';
+import { StarredComponent } from './component/starred/starred.component';
+import { TaskListComponent } from './component/task-list/task-list.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import { MenuComponent } from './component/menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    StarredComponent,
+    TaskListComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +44,8 @@ import {MatNativeDateModule} from '@angular/material/core';
     HttpClientModule,
     MatListModule,
     MatExpansionModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatBadgeModule
   ],
   providers: [TodosService],
   bootstrap: [AppComponent]

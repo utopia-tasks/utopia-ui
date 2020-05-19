@@ -20,12 +20,16 @@ export class StarredComponent implements OnInit {
     this.loading = true;
 
     // Action: filter at the service level
-    this.toDoService.getToDos()
+    this.toDoService.getInitialToDos()
       .pipe( finalize( () => this.loading = false))
       .subscribe(res => {
-        this.toDos = res.records.filter(toDo => toDo.fields.isStarred === true);
-        this.toDos = this.toDos.sort((a, b) => {
-          return new Date(b.createdTime).getTime() - new Date(a.createdTime).getTime();
+        this.toDos = res.records;
+        this.toDoService.getAdditionalToDos(res.offset).subscribe(result => {
+          this.toDos = this.toDos.concat(result.records);
+          this.toDos = this.toDos.filter(toDo => toDo.fields.isStarred === true);
+          this.toDos = this.toDos.sort((a, b) => {
+            return new Date(b.createdTime).getTime() - new Date(a.createdTime).getTime();
+          });
         });
       });
   }

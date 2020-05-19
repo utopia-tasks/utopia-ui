@@ -19,9 +19,14 @@ export class HomeComponent implements OnInit {
     this.toDos = [];
     this.loading = true;
 
-    this.toDoService.getToDos()
+    this.toDoService.getInitialToDos()
       .pipe( finalize( () => this.loading = false))
-      .subscribe(res => this.toDos = res.records );
+      .subscribe(res => {
+        this.toDos = res.records;
+        this.toDoService.getAdditionalToDos(res.offset).subscribe(result => {
+          this.toDos = this.toDos.concat(result.records);
+        });
+      });
   }
 
   addToDo(toDoInfo: string) {

@@ -18,11 +18,14 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
 
-    this.toDoService.getToDos()
+    this.toDoService.getInitialToDos()
       .pipe( finalize( () => this.loading = false))
       .subscribe(res => {
         this.toDos = res.records;
-        this.toDosStarred = res.records.filter(toDo => toDo.fields.isStarred === true);
+        this.toDoService.getAdditionalToDos(res.offset).subscribe(result => {
+          this.toDos = this.toDos.concat(result.records);
+          this.toDosStarred = this.toDos.filter(toDo => toDo.fields.isStarred === true);
+        });
       });
   }
 

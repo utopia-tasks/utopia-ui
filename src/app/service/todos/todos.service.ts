@@ -4,14 +4,20 @@ import {Record} from '../../entity/record';
 import { Observable} from 'rxjs/index';
 import {Todo} from '../../entity/todo';
 
-
 @Injectable()
 export class TodosService {
+  toDos: Todo[];
+
   constructor(private http: HttpClient) { }
 
-  getToDos(): Observable<Record> {
+  getInitialToDos(): Observable<Record> {
     const headers = new HttpHeaders().set('Authorization', 'Bearer keyzO7sPzMIG0WmZx');
-    return this.http.get<Record>('https://api.airtable.com/v0/app9S2ylfAtMmdNC4/Table%201?maxRecords=100&view=Grid%20view', { headers });
+    return this.http.get<Record>('https://api.airtable.com/v0/app9S2ylfAtMmdNC4/Table%201?view=Grid%20view', { headers });
+  }
+
+  getAdditionalToDos(offset: string): Observable<Record> {
+    const headers = new HttpHeaders().set('Authorization', 'Bearer keyzO7sPzMIG0WmZx');
+    return this.http.get<Record>(`https://api.airtable.com/v0/app9S2ylfAtMmdNC4/Table%201?offset=${offset}&view=Grid%20view`, { headers });
   }
 
   updateToDos(toDos: Todo[]): Observable<Record> {

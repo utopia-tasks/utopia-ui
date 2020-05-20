@@ -20,6 +20,7 @@ import { StarredComponent } from './component/starred/starred.component';
 import { TaskListComponent } from './component/task-list/task-list.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import { MenuComponent } from './component/menu/menu.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { MenuComponent } from './component/menu/menu.component';
     MatListModule,
     MatExpansionModule,
     MatNativeDateModule,
-    MatBadgeModule
+    MatToolbarModule
   ],
   providers: [TodosService],
   bootstrap: [AppComponent]

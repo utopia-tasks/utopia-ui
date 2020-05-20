@@ -17,6 +17,8 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+    this.toDos = [];
+    this.toDosStarred = [];
 
     this.toDoService.getInitialToDos()
       .pipe( finalize( () => this.loading = false))

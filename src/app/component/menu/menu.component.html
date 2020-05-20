@@ -13,15 +13,20 @@
           {{toDos.length}}
         </div>
       </a>
-    </mat-nav-list>  </mat-sidenav>
+    </mat-nav-list>
+  </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar class="mb-3">
+    <mat-toolbar class="app-toolbar">
       <div class="example-button-container pr-3">
         <button mat-mini-fab color="primary" (click)="sidenav.toggle()" aria-label="Example icon button with a menu icon">
           <mat-icon>menu</mat-icon>
         </button>
       </div>
-      <span>FVP</span>
+      <span class="fill-space">FVP</span>
+      <button mat-mini-fab color="primary" class="button" (click)="openAddToDo()"
+              aria-label="Example icon button with a menu icon">
+        <mat-icon>add</mat-icon>
+      </button>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

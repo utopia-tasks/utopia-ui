@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~9.1.4",
     "@angular/platform-browser-dynamic": "~9.1.4",
     "@angular/router": "~9.1.4",
+    "@material/fab": "^6.0.0",
     "airtable": "^0.8.1",
     "bootstrap": "^4.4.1",
     "requirejs": "^2.3.6",

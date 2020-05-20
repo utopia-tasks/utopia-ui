@@ -18,9 +18,11 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatNativeDateModule} from '@angular/material/core';
 import { StarredComponent } from './component/starred/starred.component';
 import { TaskListComponent } from './component/task-list/task-list.component';
-import {MatBadgeModule} from '@angular/material/badge';
-import { MenuComponent } from './component/menu/menu.component';
+import { MenuComponent} from './component/menu/menu.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatDialogModule} from '@angular/material/dialog';
+import { AddTaskComponent } from './component/add-task/add-task.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     HomeComponent,
     StarredComponent,
     TaskListComponent,
-    MenuComponent
+    MenuComponent,
+    AddTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatListModule,
     MatExpansionModule,
     MatNativeDateModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDialogModule,
+    MatDatepickerModule
   ],
   providers: [TodosService],
   bootstrap: [AppComponent]

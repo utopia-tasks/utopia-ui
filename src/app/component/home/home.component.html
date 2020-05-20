@@ -1,16 +1,1 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <form class="example-form" (keyup.enter)="addToDo(toDoText)">
-        <mat-form-field class="full-width">
-          <mat-label>Enter a To Do</mat-label>
-          <input matInput [(ngModel)]="toDoText" name="addToDo" autocomplete="off">
-        </mat-form-field>
-      </form>
-    </div>
-    <div class="col-md-4">
-      <button mat-raised-button color="primary" (click)="addToDo(toDoText)">Add</button>
-    </div>
-  </div>
-</div>
 <app-task-list *ngIf="loading == false" [toDos]="toDos"></app-task-list>

@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Todo} from '../../entity/todo';
 import {TodosService} from '../../service/todos/todos.service';
+import {AddTaskComponent} from '../add-task/add-task.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-task-list',
@@ -10,7 +12,7 @@ import {TodosService} from '../../service/todos/todos.service';
 export class TaskListComponent implements OnInit {
   @Input() toDos: Todo[];
 
-  constructor(private toDoService: TodosService) { }
+  constructor(private toDoService: TodosService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -39,6 +41,17 @@ export class TaskListComponent implements OnInit {
     event.stopPropagation();
 
     this.toDoService.updateToDos([toDo]).subscribe(res => {});
+  }
+
+  editToDo(toDo: Todo) {
+    const dialogRef = this.dialog.open(AddTaskComponent, {
+      width: '600px',
+      data: toDo
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 
 }

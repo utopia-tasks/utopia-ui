@@ -11,3 +11,7 @@
   margin-top: 20px;
   width: 100%;
 }
+
+.due-date {
+  float: right;
+}

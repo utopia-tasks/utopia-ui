@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Create a New To Do</h1>
+<div mat-dialog-content>
+  <form class="example-form" (keyup.enter)="addToDo()">
+    <mat-form-field class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="toDo.fields.Title" name="addToDo" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Due Date</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="toDo.fields.dueDate" [ngModelOptions]="{standalone: true}">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button>Cancel</button>
+  <button mat-button (click)="addToDo()">Save</button>
+</div>

@@ -5,6 +5,7 @@ export class Todo {
     Title?: string;
     isStarred?: boolean;
     isCompleted?: boolean;
+    dueDate?: string;
   };
 
   constructor(title: string) {

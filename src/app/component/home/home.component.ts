@@ -9,7 +9,6 @@ import { finalize } from 'rxjs/internal/operators';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  toDoText: string;
   toDos: Todo[];
   loading: boolean;
 
@@ -27,12 +26,5 @@ export class HomeComponent implements OnInit {
           this.toDos = this.toDos.concat(result.records);
         });
       });
-  }
-
-  addToDo(toDoInfo: string) {
-    this.toDoService.addToDos([new Todo(toDoInfo)]).subscribe(res => {
-      this.toDos = this.toDos.concat(res.records);
-      this.toDoText = '';
-    });
   }
 }

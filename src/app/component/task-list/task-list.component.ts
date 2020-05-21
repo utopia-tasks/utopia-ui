@@ -11,10 +11,14 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class TaskListComponent implements OnInit {
   @Input() toDos: Todo[];
+  today: string;
+  nextWeek: string;
 
   constructor(private toDoService: TodosService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.today = new Date().toISOString();
+    this.nextWeek = new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString();
   }
 
   addToDo(toDoInfo: string) {

@@ -14,6 +14,7 @@ export class MenuComponent implements OnInit {
   loading: boolean;
   toDos: Todo[];
   toDosStarred: Todo[];
+  toDosDeadlines: Todo[];
 
   constructor(private toDoService: TodosService, public dialog: MatDialog) { }
 
@@ -21,6 +22,7 @@ export class MenuComponent implements OnInit {
     this.loading = true;
     this.toDos = [];
     this.toDosStarred = [];
+    this.toDosDeadlines = [];
 
     this.toDoService.getInitialToDos()
       .subscribe(res => {
@@ -30,6 +32,7 @@ export class MenuComponent implements OnInit {
           .subscribe(result => {
           this.toDos = this.toDos.concat(result.records);
           this.toDosStarred = this.toDos.filter(toDo => toDo.fields.isStarred === true);
+          this.toDosDeadlines = this.toDos.filter(toDo => toDo.fields.dueDate);
         });
       });
   }

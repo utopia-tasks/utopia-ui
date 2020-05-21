@@ -23,6 +23,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AddTaskComponent } from './component/add-task/add-task.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { DeadlinesComponent } from './component/deadlines/deadlines.component';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     StarredComponent,
     TaskListComponent,
     MenuComponent,
-    AddTaskComponent
+    AddTaskComponent,
+    DeadlinesComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatNativeDateModule,
     MatToolbarModule,
     MatDialogModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatChipsModule
   ],
   providers: [TodosService],
   bootstrap: [AppComponent]

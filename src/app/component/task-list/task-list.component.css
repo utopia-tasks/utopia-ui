@@ -15,3 +15,13 @@
 .due-date {
   float: right;
 }
+
+.color-primary {
+  background-color: #6d3ebc;
+  color: white;
+}
+
+.color-accent {
+  background-color: #f9d944;
+  color: #342b0f;
+}

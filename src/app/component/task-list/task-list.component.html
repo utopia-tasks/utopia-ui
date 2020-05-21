@@ -20,7 +20,9 @@
           <p *ngIf="todo.fields.isCompleted != true">
             {{todo.fields.Title}}
             <span class="due-date">
-              {{todo.fields.dueDate | date}}
+              <mat-chip-list aria-label="Fish selection" *ngIf="todo.fields.dueDate">
+                <mat-chip [ngClass]="{'color-primary': todo.fields.dueDate <= nextWeek, 'color-accent': todo.fields.dueDate <= today}">{{todo.fields.dueDate | date}}</mat-chip>
+              </mat-chip-list>
             </span>
           </p>
         </div>

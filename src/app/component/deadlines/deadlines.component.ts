@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {TodosService} from '../../service/todos/todos.service';
-import {finalize} from 'rxjs/internal/operators';
 import {Todo} from '../../entity/todo';
-import {DatePipe} from '@angular/common';
+import {finalize} from 'rxjs/internal/operators';
 
 @Component({
-  selector: 'app-starred',
-  templateUrl: './starred.component.html',
-  styleUrls: ['./starred.component.css']
+  selector: 'app-deadlines',
+  templateUrl: './deadlines.component.html',
+  styleUrls: ['./deadlines.component.css']
 })
-export class StarredComponent implements OnInit {
+export class DeadlinesComponent implements OnInit {
   toDos: Todo[];
   loading: boolean;
 
@@ -26,10 +25,10 @@ export class StarredComponent implements OnInit {
         this.toDoService.getAdditionalToDos(res.offset)
           .pipe( finalize( () => this.loading = false))
           .subscribe(result => {
-            this.toDos = this.toDos.concat(result.records);
-            this.toDos = this.toDos.filter(toDo => toDo.fields.isStarred === true);
-            this.toDos = this.toDos.sort((a, b) => {
-            return new Date(b.createdTime).getTime() - new Date(a.createdTime).getTime();
+          this.toDos = this.toDos.concat(result.records);
+          this.toDos = this.toDos.filter(toDo => toDo.fields.dueDate);
+          this.toDos = this.toDos.sort((a, b) => {
+            return new Date(a.fields.dueDate).getTime() - new Date(b.fields.dueDate).getTime();
           });
         });
       });

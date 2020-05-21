@@ -25,6 +25,7 @@ import { AddTaskComponent } from './component/add-task/add-task.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DeadlinesComponent } from './component/deadlines/deadlines.component';
 import {MatChipsModule} from '@angular/material/chips';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,7 @@ import {MatChipsModule} from '@angular/material/chips';
     MatDatepickerModule,
     MatChipsModule
   ],
-  providers: [TodosService],
+  providers: [TodosService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -21,14 +21,17 @@
             {{todo.fields.Title}}
             <span class="due-date">
               <mat-chip-list aria-label="Fish selection" *ngIf="todo.fields.dueDate">
-                <mat-chip [ngClass]="{'color-primary': todo.fields.dueDate <= nextWeek, 'color-accent': todo.fields.dueDate <= today}">{{todo.fields.dueDate | date}}</mat-chip>
+                <mat-chip [ngClass]="{'color-primary': todo.fields.dueDate <= nextWeek, 'color-accent': todo.fields.dueDate <= today}">
+                  {{todo.fields.dueDate | date}}
+                </mat-chip>
               </mat-chip-list>
             </span>
           </p>
         </div>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <p>{{todo.createdTime | date}}</p>
+    <p *ngIf="todo.fields.startDate">Start Date: {{todo.fields.startDate | date}}</p>
+    <p>Created Time: {{todo.createdTime | date}}</p>
     <mat-action-row class="footer-buttons">
       <button mat-icon-button class="button" (click)="duplicateToDo(todo)"
               aria-label="Example icon button with a menu icon">

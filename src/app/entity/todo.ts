@@ -10,6 +10,7 @@ export class Todo {
     completedDate?: string;
     repeatingCount?: number;
     repeatingFrequency?: string;
+    subTasks?: string;
   };
 
   constructor(title?: string) {

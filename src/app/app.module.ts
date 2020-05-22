@@ -28,6 +28,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import {MatSelectModule} from '@angular/material/select';
 import { UpcomingComponent } from './component/upcoming/upcoming.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { UpcomingComponent } from './component/upcoming/upcoming.component';
     MatDialogModule,
     MatDatepickerModule,
     MatChipsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule
   ],
   providers: [TodosService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

@@ -13,12 +13,14 @@ export class TaskListComponent implements OnInit {
   @Input() toDos: Todo[];
   today: string;
   nextWeek: string;
+  checklist: any[];
 
   constructor(private toDoService: TodosService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.today = new Date().toISOString();
     this.nextWeek = new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString();
+    this.checklist = [];
   }
 
   updateIsCompleted(toDo: Todo, event?: Event) {
@@ -94,4 +96,32 @@ export class TaskListComponent implements OnInit {
     });
   }
 
+  onOpen(todo: Todo) {
+    const tempChecklist = todo.fields.subTasks.split(',');
+
+    tempChecklist.forEach((item, index) => {
+      if (index % 2 === 0) {
+        this.checklist.push({
+          label: item,
+          isChecked: JSON.parse(tempChecklist[index + 1])
+        });
+      }
+    });
+  }
+
+  onClose(todo: Todo) {
+    let tempChecklist = '';
+    this.checklist.forEach(item => {
+      if (tempChecklist === '') {
+        tempChecklist = `${item.label},${item.isChecked}`;
+      } else {
+        tempChecklist = `${tempChecklist},${item.label},${item.isChecked}`;
+
+      }
+    });
+
+    todo.fields.subTasks = tempChecklist;
+    this.checklist = [];
+    this.toDoService.updateToDos([todo]).subscribe(res => {});
+  }
 }

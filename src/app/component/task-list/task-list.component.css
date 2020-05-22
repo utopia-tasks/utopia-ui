@@ -8,12 +8,8 @@
 }
 
 .todo-title {
-  margin-top: 20px;
+  display: flex;
   width: 100%;
-}
-
-.due-date {
-  float: right;
 }
 
 .color-primary {
@@ -24,4 +20,16 @@
 .color-accent {
   background-color: #f9d944;
   color: #342b0f;
+}
+
+.chip {
+  margin-top: 14px;
+}
+
+.title {
+  margin-top: 20px;
+}
+
+.strike {
+  text-decoration: line-through;
 }

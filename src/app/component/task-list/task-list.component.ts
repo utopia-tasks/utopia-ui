@@ -21,12 +21,6 @@ export class TaskListComponent implements OnInit {
     this.nextWeek = new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString();
   }
 
-  addToDo(toDoInfo: string) {
-    this.toDoService.addToDos([new Todo(toDoInfo)]).subscribe(res => {
-      this.toDos = this.toDos.concat(res.records);
-    });
-  }
-
   updateIsCompleted(toDo: Todo, event?: Event) {
     toDo.fields.isCompleted = !toDo.fields.isCompleted;
     toDo.fields.isStarred = false;
@@ -36,7 +30,13 @@ export class TaskListComponent implements OnInit {
   }
 
   duplicateToDo(toDo: Todo) {
-    this.addToDo(toDo.fields.Title);
+    const tempToDo = new Todo();
+    toDo.fields.isStarred = false;
+    tempToDo.fields = toDo.fields;
+
+    this.toDoService.addToDos([tempToDo]).subscribe(res => {
+      this.toDos = this.toDos.concat(res.records);
+    });
     this.updateIsCompleted(toDo);
   }
 

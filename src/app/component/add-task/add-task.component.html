@@ -7,9 +7,15 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Due Date</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="toDo.fields.dueDate" [ngModelOptions]="{standalone: true}">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <input matInput [matDatepicker]="due" [(ngModel)]="toDo.fields.dueDate" [ngModelOptions]="{standalone: true}">
+      <mat-datepicker-toggle matSuffix [for]="due"></mat-datepicker-toggle>
+      <mat-datepicker #due></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="ml-5">
+      <mat-label>Start Date</mat-label>
+      <input matInput [matDatepicker]="start" [(ngModel)]="toDo.fields.startDate" [ngModelOptions]="{standalone: true}">
+      <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+      <mat-datepicker #start></mat-datepicker>
     </mat-form-field>
   </form>
 </div>

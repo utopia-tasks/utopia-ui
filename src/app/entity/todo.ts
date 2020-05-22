@@ -7,9 +7,10 @@ export class Todo {
     isCompleted?: boolean;
     dueDate?: string;
     startDate?: string;
+    completedDate?: string;
   };
 
-  constructor(title: string) {
+  constructor(title?: string) {
     this.fields = {};
     this.fields.Title = title;
   }

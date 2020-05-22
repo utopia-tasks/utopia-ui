@@ -1,6 +1,6 @@
 <mat-accordion>
   <mat-expansion-panel *ngFor="let todo of toDos" hideToggle>
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header collapsedHeight="60px" expandedHeight="60px">
       <mat-panel-title>
         <button mat-mini-fab color="primary" *ngIf="todo.fields.isStarred == true" (click)="updateIsStarred(todo, $event)" class="button"
                 aria-label="Example icon button with a menu icon">
@@ -16,22 +16,25 @@
           <mat-icon *ngIf="todo.fields.isCompleted != true">check_box_outline_blank</mat-icon>
         </button>
         <div class="todo-title">
-          <s *ngIf="todo.fields.isCompleted == true">{{todo.fields.Title}}</s>
-          <p *ngIf="todo.fields.isCompleted != true">
+          <mat-chip-list class="chip" *ngIf="todo.fields.startDate">
+            <mat-chip>
+              {{todo.fields.startDate | date}}
+            </mat-chip>
+          </mat-chip-list>
+          <div class="title ml-2" [ngClass]="{'strike': todo.fields.isCompleted == true}">
             {{todo.fields.Title}}
-            <span class="due-date">
-              <mat-chip-list aria-label="Fish selection" *ngIf="todo.fields.dueDate">
-                <mat-chip [ngClass]="{'color-primary': todo.fields.dueDate <= nextWeek, 'color-accent': todo.fields.dueDate <= today}">
-                  {{todo.fields.dueDate | date}}
-                </mat-chip>
-              </mat-chip-list>
-            </span>
-          </p>
+          </div>
+          <mat-chip-list class="chip ml-auto" *ngIf="todo.fields.dueDate">
+            <mat-chip [ngClass]="{'color-primary': todo.fields.dueDate <= nextWeek, 'color-accent': todo.fields.dueDate <= today}">
+              {{todo.fields.dueDate | date}}
+            </mat-chip>
+          </mat-chip-list>
         </div>
       </mat-panel-title>
     </mat-expansion-panel-header>
+    <p class="mt-3">Created Time: {{todo.createdTime | date}}</p>
     <p *ngIf="todo.fields.startDate">Start Date: {{todo.fields.startDate | date}}</p>
-    <p>Created Time: {{todo.createdTime | date}}</p>
+    <p *ngIf="todo.fields.completedDate">Completion Date: {{todo.fields.completedDate | date}}</p>
     <mat-action-row class="footer-buttons">
       <button mat-icon-button class="button" (click)="duplicateToDo(todo)"
               aria-label="Example icon button with a menu icon">

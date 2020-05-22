@@ -8,6 +8,8 @@ export class Todo {
     dueDate?: string;
     startDate?: string;
     completedDate?: string;
+    repeatingCount?: number;
+    repeatingFrequency?: string;
   };
 
   constructor(title?: string) {

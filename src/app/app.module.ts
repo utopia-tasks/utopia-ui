@@ -26,6 +26,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DeadlinesComponent } from './component/deadlines/deadlines.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import {MatSelectModule} from '@angular/material/select';
+import { UpcomingComponent } from './component/upcoming/upcoming.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     TaskListComponent,
     MenuComponent,
     AddTaskComponent,
-    DeadlinesComponent
+    DeadlinesComponent,
+    UpcomingComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     MatToolbarModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSelectModule
   ],
   providers: [TodosService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

@@ -27,6 +27,7 @@ export class DeadlinesComponent implements OnInit {
           .subscribe(result => {
           this.toDos = this.toDos.concat(result.records);
           this.toDos = this.toDos.filter(toDo => toDo.fields.dueDate);
+          this.toDos = this.toDos.filter(toDo => toDo.fields.startDate <= new Date().toISOString() || !toDo.fields.startDate);
           this.toDos = this.toDos.sort((a, b) => {
             return new Date(a.fields.dueDate).getTime() - new Date(b.fields.dueDate).getTime();
           });

@@ -27,6 +27,40 @@ export class TaskListComponent implements OnInit {
     if (event) { event.stopPropagation(); }
 
     this.toDoService.updateToDos([toDo]).subscribe(res => {});
+
+    if (toDo.fields.repeatingFrequency) {
+      const tempToDo = new Todo();
+      tempToDo.fields = Object.assign({}, toDo.fields);
+      tempToDo.fields.isCompleted = false;
+
+      // ACTION: Handle un-check/re-checking on repeating todods
+      let tempDate: string;
+      switch (tempToDo.fields.repeatingFrequency) {
+        case 'Day': {
+          tempDate = new Date(new Date(tempToDo.fields.dueDate).getTime() +
+            toDo.fields.repeatingCount * 24 * 60 * 60 * 1000).toISOString();
+          break;
+        }
+        case 'Week': {
+          tempDate = new Date(new Date(tempToDo.fields.dueDate).getTime() +
+            toDo.fields.repeatingCount * 7 * 24 * 60 * 60 * 1000).toISOString();
+          break;
+        }
+        case 'Month': {
+          tempDate = new Date(new Date(tempToDo.fields.dueDate).getTime() +
+            toDo.fields.repeatingCount * 30 * 24 * 60 * 60 * 1000).toISOString();
+          break;
+        }
+        default: { break; }
+      }
+
+      tempToDo.fields.startDate = tempDate;
+      tempToDo.fields.dueDate = tempDate;
+
+      this.toDoService.addToDos([tempToDo]).subscribe(res => {
+        this.toDos = this.toDos.concat(res.records);
+      });
+    }
   }
 
   duplicateToDo(toDo: Todo) {
@@ -37,7 +71,9 @@ export class TaskListComponent implements OnInit {
     this.toDoService.addToDos([tempToDo]).subscribe(res => {
       this.toDos = this.toDos.concat(res.records);
     });
-    this.updateIsCompleted(toDo);
+
+    toDo.fields.isCompleted = !toDo.fields.isCompleted;
+    this.toDoService.updateToDos([toDo]).subscribe(res => {});
   }
 
   updateIsStarred(toDo: Todo, event: Event) {
@@ -54,7 +90,7 @@ export class TaskListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      console.log('the dialog was closed');
     });
   }
 

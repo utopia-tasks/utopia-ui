@@ -15,6 +15,7 @@ export class MenuComponent implements OnInit {
   toDos: Todo[];
   toDosStarred: Todo[];
   toDosDeadlines: Todo[];
+  toDosUpcoming: Todo[];
 
   constructor(private toDoService: TodosService, public dialog: MatDialog) { }
 
@@ -23,6 +24,7 @@ export class MenuComponent implements OnInit {
     this.toDos = [];
     this.toDosStarred = [];
     this.toDosDeadlines = [];
+    this.toDosUpcoming = [];
 
     this.toDoService.getInitialToDos()
       .subscribe(res => {
@@ -30,10 +32,13 @@ export class MenuComponent implements OnInit {
         this.toDoService.getAdditionalToDos(res.offset)
           .pipe( finalize( () => this.loading = false))
           .subscribe(result => {
-          this.toDos = this.toDos.concat(result.records);
-          this.toDosStarred = this.toDos.filter(toDo => toDo.fields.isStarred === true);
-          this.toDosDeadlines = this.toDos.filter(toDo => toDo.fields.dueDate);
-        });
+            this.toDos = this.toDos.concat(result.records);
+            this.toDosStarred = this.toDos.filter(toDo => toDo.fields.isStarred === true &&
+              (toDo.fields.startDate <= new Date().toISOString() || !toDo.fields.startDate));
+            this.toDosDeadlines = this.toDos.filter(toDo => toDo.fields.dueDate && (toDo.fields.startDate <= new Date().toISOString()
+              || !toDo.fields.startDate));
+            this.toDosUpcoming = this.toDos.filter(toDo => toDo.fields.startDate > new Date().toISOString());
+          });
       });
   }
 

@@ -3,6 +3,7 @@ import {TodosService} from '../../service/todos/todos.service';
 import {finalize} from 'rxjs/internal/operators';
 import {Todo} from '../../entity/todo';
 import {DatePipe} from '@angular/common';
+import {Record} from '../../entity/record';
 
 @Component({
   selector: 'app-starred',
@@ -20,19 +21,27 @@ export class StarredComponent implements OnInit {
     this.loading = true;
 
     // Action: filter at the service level
-    this.toDoService.getInitialToDos()
+    this.toDoService.getToDos('0')
+      .pipe( finalize( () => this.loading = false))
       .subscribe(res => {
         this.toDos = res.records;
-        this.toDoService.getAdditionalToDos(res.offset)
-          .pipe( finalize( () => this.loading = false))
-          .subscribe(result => {
-            this.toDos = this.toDos.concat(result.records);
-            this.toDos = this.toDos.filter(toDo => toDo.fields.isStarred === true);
-            this.toDos = this.toDos.filter(toDo => toDo.fields.startDate <= new Date().toISOString() || !toDo.fields.startDate);
-            this.toDos = this.toDos.sort((a, b) => {
-              return new Date(b.createdTime).getTime() - new Date(a.createdTime).getTime();
-            });
-        });
+        this.getMoreTodos(res);
       });
+  }
+
+  getMoreTodos(record: Record) {
+    if (record.offset) {
+      this.toDoService.getToDos(record.offset)
+        .subscribe(res => {
+          this.toDos = this.toDos.concat(res.records);
+          this.getMoreTodos(res);
+        });
+    } else {
+      this.toDos = this.toDos.filter(toDo => toDo.fields.isStarred === true);
+      this.toDos = this.toDos.filter(toDo => toDo.fields.startDate <= new Date().toISOString() || !toDo.fields.startDate);
+      this.toDos = this.toDos.sort((a, b) => {
+        return new Date(b.createdTime).getTime() - new Date(a.createdTime).getTime();
+      });
+    }
   }
 }

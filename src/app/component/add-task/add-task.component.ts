@@ -11,12 +11,14 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 export class AddTaskComponent implements OnInit {
   toDo: Todo;
   repeatingFrequencyList: string[];
+  projectList: string[];
 
   constructor(private toDoService: TodosService, @Inject(MAT_DIALOG_DATA) public data: Todo) {}
 
   ngOnInit(): void {
     this.toDo = this.data;
     this.repeatingFrequencyList = [null, 'Day', 'Week', 'Month'];
+    this.projectList = ['Inbox', 'Personal', 'Work'];
   }
 
   addToDo() {

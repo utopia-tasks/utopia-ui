@@ -5,23 +5,31 @@
       <mat-label>Title</mat-label>
       <input matInput [(ngModel)]="toDo.fields.Title" name="title" autocomplete="off">
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Due Date</mat-label>
-      <input matInput [matDatepicker]="due" [(ngModel)]="toDo.fields.dueDate" name="dueDate">
-      <mat-datepicker-toggle matSuffix [for]="due"></mat-datepicker-toggle>
-      <mat-datepicker #due></mat-datepicker>
+    <mat-form-field class="full-width">
+      <mat-label>Project</mat-label>
+      <mat-select [(value)]="toDo.fields.project">
+        <mat-option *ngFor="let project of projectList" [value]="project">
+          {{project}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
-    <mat-form-field class="ml-5">
+    <mat-form-field class="half-width">
       <mat-label>Start Date</mat-label>
       <input matInput [matDatepicker]="start" [(ngModel)]="toDo.fields.startDate" name="startDate">
       <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
       <mat-datepicker #start></mat-datepicker>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="ml-5 half-width">
+      <mat-label>Due Date</mat-label>
+      <input matInput [matDatepicker]="due" [(ngModel)]="toDo.fields.dueDate" name="dueDate">
+      <mat-datepicker-toggle matSuffix [for]="due"></mat-datepicker-toggle>
+      <mat-datepicker #due></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="half-width">
       <mat-label>Repeating Count</mat-label>
       <input matInput type="number" [(ngModel)]="toDo.fields.repeatingCount" name="repeatingCount">
     </mat-form-field>
-    <mat-form-field class="ml-5">
+    <mat-form-field class="ml-5 half-width">
       <mat-label>Repeating Frequency</mat-label>
       <mat-select [(value)]="toDo.fields.repeatingFrequency">
         <mat-option *ngFor="let freq of repeatingFrequencyList" [value]="freq">

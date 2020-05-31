@@ -11,6 +11,7 @@ export class Todo {
     repeatingCount?: number;
     repeatingFrequency?: string;
     subTasks?: string;
+    project?: string;
   };
 
   constructor(title?: string) {

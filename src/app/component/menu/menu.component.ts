@@ -4,6 +4,7 @@ import {Todo} from '../../entity/todo';
 import {finalize} from 'rxjs/internal/operators';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {AddTaskComponent} from '../add-task/add-task.component';
+import {Record} from '../../entity/record';
 
 @Component({
   selector: 'app-menu',
@@ -26,20 +27,28 @@ export class MenuComponent implements OnInit {
     this.toDosDeadlines = [];
     this.toDosUpcoming = [];
 
-    this.toDoService.getInitialToDos()
+    this.toDoService.getToDos('0')
+      .pipe( finalize( () => this.loading = false))
       .subscribe(res => {
         this.toDos = res.records;
-        this.toDoService.getAdditionalToDos(res.offset)
-          .pipe( finalize( () => this.loading = false))
-          .subscribe(result => {
-            this.toDos = this.toDos.concat(result.records);
-            this.toDosStarred = this.toDos.filter(toDo => toDo.fields.isStarred === true &&
-              (toDo.fields.startDate <= new Date().toISOString() || !toDo.fields.startDate));
-            this.toDosDeadlines = this.toDos.filter(toDo => toDo.fields.dueDate && (toDo.fields.startDate <= new Date().toISOString()
-              || !toDo.fields.startDate));
-            this.toDosUpcoming = this.toDos.filter(toDo => toDo.fields.startDate > new Date().toISOString());
-          });
+        this.getMoreTodos(res);
       });
+  }
+
+  getMoreTodos(record: Record) {
+    if (record.offset) {
+      this.toDoService.getToDos(record.offset)
+        .subscribe(res => {
+          this.toDos = this.toDos.concat(res.records);
+          this.getMoreTodos(res);
+        });
+    } else {
+      this.toDosStarred = this.toDos.filter(toDo => toDo.fields.isStarred === true &&
+        (toDo.fields.startDate <= new Date().toISOString() || !toDo.fields.startDate));
+      this.toDosDeadlines = this.toDos.filter(toDo => toDo.fields.dueDate && (toDo.fields.startDate <= new Date().toISOString()
+        || !toDo.fields.startDate));
+      this.toDosUpcoming = this.toDos.filter(toDo => toDo.fields.startDate > new Date().toISOString());
+    }
   }
 
   openAddToDo() {

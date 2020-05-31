@@ -10,13 +10,7 @@ export class TodosService {
 
   constructor(private http: HttpClient) { }
 
-  getInitialToDos(): Observable<Record> {
-    const headers = new HttpHeaders().set('Authorization', 'Bearer keyzO7sPzMIG0WmZx');
-    return this.http.get<Record>('https://api.airtable.com/v0/app9S2ylfAtMmdNC4/Table%201?timeZone=America/Los_Angeles&view=Grid%20view',
-      { headers });
-  }
-
-  getAdditionalToDos(offset: string): Observable<Record> {
+  getToDos(offset: string): Observable<Record> {
     const headers = new HttpHeaders().set('Authorization', 'Bearer keyzO7sPzMIG0WmZx');
     return this.http.get<Record>(`https://api.airtable.com/v0/app9S2ylfAtMmdNC4/Table%201?offset=${offset}&view=Grid%20view`, { headers });
   }

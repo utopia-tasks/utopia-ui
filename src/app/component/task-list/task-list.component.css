@@ -33,3 +33,12 @@
 .strike {
   text-decoration: line-through;
 }
+
+.project-rectangle {
+  width: 10px;
+  height: 60px;
+}
+
+.personal {
+  background-color: #6d3ebc;
+}

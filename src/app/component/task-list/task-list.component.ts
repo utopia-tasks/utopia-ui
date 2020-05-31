@@ -97,16 +97,18 @@ export class TaskListComponent implements OnInit {
   }
 
   onOpen(todo: Todo) {
-    const tempChecklist = todo.fields.subTasks.split(',');
+    if (todo.fields.subTasks) {
+      const tempChecklist = todo.fields.subTasks.split(',');
 
-    tempChecklist.forEach((item, index) => {
-      if (index % 2 === 0) {
-        this.checklist.push({
-          label: item,
-          isChecked: JSON.parse(tempChecklist[index + 1])
-        });
-      }
-    });
+      tempChecklist.forEach((item, index) => {
+        if (index % 2 === 0) {
+          this.checklist.push({
+            label: item,
+            isChecked: JSON.parse(tempChecklist[index + 1])
+          });
+        }
+      });
+    }
   }
 
   onClose(todo: Todo) {

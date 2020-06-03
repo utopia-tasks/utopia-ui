@@ -29,6 +29,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import {MatSelectModule} from '@angular/material/select';
 import { UpcomingComponent } from './component/upcoming/upcoming.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ScanComponent } from './component/scan/scan.component';
+import { TaskCardComponent } from './component/task-card/task-card.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MenuComponent,
     AddTaskComponent,
     DeadlinesComponent,
-    UpcomingComponent
+    UpcomingComponent,
+    ScanComponent,
+    TaskCardComponent
   ],
   imports: [
     BrowserModule,

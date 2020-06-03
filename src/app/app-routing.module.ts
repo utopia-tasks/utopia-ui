@@ -4,6 +4,7 @@ import { HomeComponent } from './component/home/home.component';
 import { StarredComponent } from './component/starred/starred.component';
 import {DeadlinesComponent} from './component/deadlines/deadlines.component';
 import {UpcomingComponent} from './component/upcoming/upcoming.component';
+import {ScanComponent} from './component/scan/scan.component';
 
 
 const routes: Routes = [
@@ -11,7 +12,9 @@ const routes: Routes = [
   { path: 'all', component: HomeComponent },
   { path: 'starred', component: StarredComponent },
   { path: 'deadlines', component: DeadlinesComponent },
-  { path: 'upcoming', component: UpcomingComponent }
+  { path: 'upcoming', component: UpcomingComponent },
+  { path: 'scan/:startIndex', component: ScanComponent }
+
 ];
 
 @NgModule({

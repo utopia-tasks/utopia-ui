@@ -1,0 +1,18 @@
+<div class="container" *ngIf="!loading">
+  <div class="row mt-3 justify-content-md-center">
+    <h1>What do you want to do next?</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-6" (click)="selectStarred()">
+      <app-task-card [toDo]="toDos[starredIndex]"></app-task-card>
+    </div>
+    <div class="col-md-6" (click)="selectNewStarredToDo()">
+      <app-task-card *ngIf="startToDo" [toDo]="startToDo"></app-task-card>
+      <div *ngIf="!startToDo">
+        <h1>
+          Congrats! You've reached the end of the list!
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>

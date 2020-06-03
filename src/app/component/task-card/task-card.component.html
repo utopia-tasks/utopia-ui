@@ -1,0 +1,33 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <button mat-icon-button (click)="updateIsCompleted(toDo, $event)" class="button"
+              aria-label="Example icon button with a menu icon">
+        <mat-icon *ngIf="toDo.fields.isCompleted == true">check_box</mat-icon>
+        <mat-icon *ngIf="toDo.fields.isCompleted != true">check_box_outline_blank</mat-icon>
+      </button>
+      {{toDo.fields.Title}}
+    </mat-card-title>
+    <mat-card-subtitle>{{toDo.fields.project}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div>
+      Created Time: {{toDo.createdTime | date}}
+    </div>
+    <div *ngIf="toDo.fields.startDate">
+      Start Date: {{toDo.fields.startDate | date}}
+    </div>
+    <div *ngIf="toDo.fields.dueDate">
+      Due Date: {{toDo.fields.dueDate | date}}
+    </div>
+    <div *ngIf="toDo.fields.repeatingFrequency">
+      Repeating: {{toDo.fields.repeatingFrequency}} - {{toDo.fields.repeatingCount}}
+    </div>
+    <div *ngIf="toDo.fields.subTasks">
+      Sub Tasks: {{toDo.fields.subTasks}}
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button></button>
+  </mat-card-actions>
+</mat-card>

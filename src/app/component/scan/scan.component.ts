@@ -66,4 +66,30 @@ export class ScanComponent implements OnInit {
 
     this.selectStarred();
   }
+
+  clearAllStars() {
+    const tempToDos = this.toDos.filter(todo => todo.fields.isStarred).map(todo => {
+      todo.fields.isStarred = false;
+      return todo;
+    });
+
+    this.toDos = this.toDos.map(todo => {
+      todo.fields.isStarred = false;
+      return todo;
+    });
+
+    this.toDos[0].fields.isStarred = true;
+    const index = tempToDos.map(todo => todo.id).indexOf(this.toDos[0].id);
+    if (index > -1) {
+      tempToDos[index].fields.isStarred = true;
+    } else {
+      tempToDos.push(this.toDos[0]);
+    }
+    this.starredIndex = 0;
+    this.startIndex = 1;
+    this.startToDo = this.toDos[this.startIndex];
+
+    // ACTION: Deal with the cap of ten records
+    this.toDoService.updateToDos(tempToDos).subscribe(res => {});
+  }
 }

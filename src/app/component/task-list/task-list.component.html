@@ -18,7 +18,7 @@
         <div class="todo-title">
           <mat-chip-list class="chip" *ngIf="todo.fields.startDate">
             <mat-chip>
-              {{todo.fields.startDate | date}}
+              {{todo.fields.startDate | date: 'MMM d'}}
             </mat-chip>
           </mat-chip-list>
           <div class="title ml-2" [ngClass]="{'strike': todo.fields.isCompleted == true}">
@@ -32,7 +32,7 @@
           </button>
           <mat-chip-list class="chip" *ngIf="todo.fields.dueDate" [ngClass]="{'ml-auto': !todo.fields.repeatingFrequency}">
             <mat-chip [ngClass]="{'color-primary': todo.fields.dueDate <= nextWeek, 'color-accent': todo.fields.dueDate <= today}">
-              {{todo.fields.dueDate | date}}
+              {{todo.fields.dueDate | date: 'MMMM d'}}
             </mat-chip>
           </mat-chip-list>
         </div>

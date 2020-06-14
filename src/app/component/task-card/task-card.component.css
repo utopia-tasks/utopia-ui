@@ -1,3 +1,23 @@
 mat-card-subtitle {
   margin-left: 45px;
 }
+
+mat-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card-content {
+  flex-grow: 1;
+}
+
+.color-primary {
+  background-color: #6d3ebc;
+  color: white;
+}
+
+.color-accent {
+  background-color: #f9d944;
+  color: #342b0f;
+}

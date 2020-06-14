@@ -92,4 +92,21 @@ export class ScanComponent implements OnInit {
     // ACTION: Deal with the cap of ten records
     this.toDoService.updateToDos(tempToDos).subscribe(res => {});
   }
+
+  moveStartIndex(count: number) {
+    switch (this.startIndex + count) {
+      case -1: {
+        break;
+      }
+      case this.toDos.length: {
+        this.startToDo = null;
+        break;
+      }
+      default: {
+        this.startIndex = this.startIndex + count;
+        this.startToDo = this.toDos[this.startIndex];
+        break;
+      }
+    }
+  }
 }

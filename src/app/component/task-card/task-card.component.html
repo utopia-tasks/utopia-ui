@@ -11,23 +11,40 @@
     <mat-card-subtitle>{{toDo.fields.project}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <div>
+    <div class="mb-1">
       Created Time: {{toDo.createdTime | date}}
     </div>
     <div *ngIf="toDo.fields.startDate">
-      Start Date: {{toDo.fields.startDate | date}}
+      <mat-chip-list class="chip">
+        <mat-chip>
+          <mat-icon class="mr-1">calendar_today</mat-icon>
+          {{toDo.fields.startDate | date: 'MMM d'}}
+        </mat-chip>
+      </mat-chip-list>
     </div>
     <div *ngIf="toDo.fields.dueDate">
-      Due Date: {{toDo.fields.dueDate | date}}
+      <mat-chip-list class="chip" [ngClass]="{'ml-auto': !toDo.fields.repeatingFrequency}">
+        <mat-chip [ngClass]="{'color-primary': toDo.fields.dueDate <= nextWeek, 'color-accent': toDo.fields.dueDate <= today}">
+          <mat-icon class="mr-1">flag</mat-icon>
+          {{toDo.fields.dueDate | date: 'MMMM d'}}
+        </mat-chip>
+      </mat-chip-list>
     </div>
     <div *ngIf="toDo.fields.repeatingFrequency">
-      Repeating: {{toDo.fields.repeatingFrequency}} - {{toDo.fields.repeatingCount}}
+      <button mat-icon-button class="button">
+        <mat-icon>autorenew</mat-icon>
+      </button>
+      {{toDo.fields.repeatingCount}} - {{toDo.fields.repeatingFrequency}}
     </div>
     <div *ngIf="toDo.fields.subTasks">
       Sub Tasks: {{toDo.fields.subTasks}}
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button></button>
-  </mat-card-actions>
+    <button mat-icon-button class="button" (click)="duplicateToDo(toDo)">
+      <mat-icon>library_add_check</mat-icon>
+    </button>
+    <button mat-icon-button class="button" (click)="editToDo(toDo)">
+      <mat-icon>edit</mat-icon>
+    </button>  </mat-card-actions>
 </mat-card>

@@ -31,6 +31,7 @@ import { UpcomingComponent } from './component/upcoming/upcoming.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ScanComponent } from './component/scan/scan.component';
 import { TaskCardComponent } from './component/task-card/task-card.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { TaskCardComponent } from './component/task-card/task-card.component';
     MatDatepickerModule,
     MatChipsModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSnackBarModule
   ],
   providers: [TodosService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

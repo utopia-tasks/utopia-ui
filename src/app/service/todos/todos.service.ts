@@ -10,6 +10,10 @@ export class TodosService {
 
   constructor(private http: HttpClient) { }
 
+  getPing(): Observable<any> {
+    return this.http.get<any>('http://69.181.252.55:3000/ping');
+  }
+
   getToDos(offset: string): Observable<Record> {
     const headers = new HttpHeaders().set('Authorization', 'Bearer keyzO7sPzMIG0WmZx');
     return this.http.get<Record>(`https://api.airtable.com/v0/app9S2ylfAtMmdNC4/Table%201?offset=${offset}&view=Grid%20view`, { headers });

@@ -41,10 +41,10 @@
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-icon-button class="button" (click)="duplicateToDo(toDo)">
+    <button mat-icon-button class="button" (click)="duplicateToDo(toDo, $event)">
       <mat-icon>library_add_check</mat-icon>
     </button>
-    <button mat-icon-button class="button" (click)="editToDo(toDo)">
+    <button mat-icon-button class="button" (click)="editToDo(toDo, $event)">
       <mat-icon>edit</mat-icon>
     </button>  </mat-card-actions>
 </mat-card>

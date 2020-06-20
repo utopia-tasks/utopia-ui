@@ -61,7 +61,9 @@ export class TaskCardComponent implements OnInit {
     }
   }
 
-  editToDo(task: Todo) {
+  editToDo(task: Todo, event: Event) {
+    if (event) { event.stopPropagation(); }
+
     const dialogRef = this.dialog.open(AddTaskComponent, {
       width: '600px',
       data: task
@@ -72,7 +74,9 @@ export class TaskCardComponent implements OnInit {
     });
   }
 
-  duplicateToDo(task: Todo) {
+  duplicateToDo(task: Todo, event: Event) {
+    if (event) { event.stopPropagation(); }
+
     const tempToDo = new Todo();
     task.fields.isStarred = false;
     tempToDo.fields = task.fields;

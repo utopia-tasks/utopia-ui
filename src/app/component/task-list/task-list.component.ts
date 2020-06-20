@@ -3,6 +3,8 @@ import {Todo} from '../../entity/todo';
 import {TodosService} from '../../service/todos/todos.service';
 import {AddTaskComponent} from '../add-task/add-task.component';
 import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-task-list',
@@ -15,7 +17,8 @@ export class TaskListComponent implements OnInit {
   nextWeek: string;
   checklist: any[];
 
-  constructor(private toDoService: TodosService, public dialog: MatDialog) { }
+  constructor(private toDoService: TodosService, public dialog: MatDialog, private snackBar: MatSnackBar,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.today = new Date().toISOString();
@@ -24,6 +27,8 @@ export class TaskListComponent implements OnInit {
   }
 
   updateIsCompleted(toDo: Todo, event?: Event) {
+    this.showCompletedSnackBar('Cangratulations, you completed a task!', toDo);
+
     toDo.fields.isCompleted = !toDo.fields.isCompleted;
     toDo.fields.isStarred = false;
     if (event) { event.stopPropagation(); }
@@ -66,6 +71,8 @@ export class TaskListComponent implements OnInit {
   }
 
   duplicateToDo(toDo: Todo) {
+    this.showCompletedSnackBar('Cangratulations, you made progress on a task!', toDo);
+
     const tempToDo = new Todo();
     toDo.fields.isStarred = false;
     tempToDo.fields = toDo.fields;
@@ -125,5 +132,14 @@ export class TaskListComponent implements OnInit {
     todo.fields.subTasks = tempChecklist;
     this.checklist = [];
     this.toDoService.updateToDos([todo]).subscribe(res => {});
+  }
+
+  showCompletedSnackBar(message: string, toDo: Todo) {
+    const snackBarRef = this.snackBar.open(message, 'Dismiss', {
+      duration: 7500,
+    });
+
+    snackBarRef.onAction().subscribe(() => {
+    });
   }
 }

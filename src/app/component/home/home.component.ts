@@ -3,6 +3,7 @@ import { TodosService } from '../../service/todos/todos.service';
 import { Todo } from '../../entity/todo';
 import { finalize } from 'rxjs/internal/operators';
 import {Record} from '../../entity/record';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,10 @@ export class HomeComponent implements OnInit {
     this.toDoService.getToDos('0')
       .pipe( finalize( () => this.loading = false))
       .subscribe(res => {
+        this.toDoService.getPing().subscribe(res2 => {
+          console.log(res2);
+        });
+
         this.toDos = res.records;
         this.getMoreTodos(res);
       });

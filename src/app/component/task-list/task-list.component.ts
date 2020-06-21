@@ -27,7 +27,7 @@ export class TaskListComponent implements OnInit {
   }
 
   updateIsCompleted(toDo: Todo, event?: Event) {
-    this.showCompletedSnackBar('Cangratulations, you completed a task!', toDo);
+    this.showCompletedSnackBar('Congratulations, you completed a task!', toDo);
 
     toDo.fields.isCompleted = !toDo.fields.isCompleted;
     toDo.fields.isStarred = false;
@@ -71,7 +71,7 @@ export class TaskListComponent implements OnInit {
   }
 
   duplicateToDo(toDo: Todo) {
-    this.showCompletedSnackBar('Cangratulations, you made progress on a task!', toDo);
+    this.showCompletedSnackBar('Congratulations, you made progress on a task!', toDo);
 
     const tempToDo = new Todo();
     toDo.fields.isStarred = false;

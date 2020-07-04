@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="toDo">
   <mat-card-header>
     <mat-card-title>
       <button mat-icon-button (click)="updateIsCompleted(toDo, $event)" class="button"

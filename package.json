@@ -24,6 +24,7 @@
     "@material/fab": "^6.0.0",
     "airtable": "^0.8.1",
     "bootstrap": "^4.4.1",
+    "ngx-cookie-service": "^3.0.4",
     "requirejs": "^2.3.6",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

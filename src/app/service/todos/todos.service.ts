@@ -1,38 +1,26 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Record} from '../../entity/record';
-import { Observable} from 'rxjs/index';
-import {Todo} from '../../entity/todo';
+import { HttpClient } from '@angular/common/http';
+import { Record } from '../../entity/record';
+import { Observable, of } from 'rxjs/index';
+import { Todo } from '../../entity/todo';
 
 @Injectable()
 export class TodosService {
   toDos: Todo[];
 
-  constructor(private http: HttpClient) { }
-
-  getPing(): Observable<any> {
-    return this.http.get<any>('http://69.181.252.55:3000/ping');
+  constructor(private http: HttpClient) {
   }
 
   getToDos(offset: string): Observable<Record> {
-    const headers = new HttpHeaders().set('Authorization', 'Bearer keyzO7sPzMIG0WmZx');
-    return this.http.get<Record>(`https://api.airtable.com/v0/app9S2ylfAtMmdNC4/Table%201?offset=${offset}&view=Grid%20view`, { headers });
+    return of(new Record());
   }
 
   updateToDos(toDos: Todo[]): Observable<Record> {
-    const headers = new HttpHeaders()
-      .set('Authorization', 'Bearer keyzO7sPzMIG0WmZx')
-      .set('Content-Type', 'application/json');
-
-    return this.http.patch<Record>('https://api.airtable.com/v0/app9S2ylfAtMmdNC4/Table%201', this.convertToJSON(toDos), { headers });
+    return of(new Record());
   }
 
   addToDos(toDos: Todo[]): Observable<Record> {
-    const headers = new HttpHeaders()
-      .set('Authorization', 'Bearer keyzO7sPzMIG0WmZx')
-      .set('Content-Type', 'application/json');
-
-    return this.http.post<Record>('https://api.airtable.com/v0/app9S2ylfAtMmdNC4/Table%201', this.convertToJSON(toDos), { headers });
+    return of(new Record());
   }
 
   convertToJSON(toDos: Todo[]): string {
@@ -46,9 +34,8 @@ export class TodosService {
           fields: toDo.fields
         });
       } else {
-        body.records.push({ fields: toDo.fields });
+        body.records.push({fields: toDo.fields});
       }
-
     });
 
     return JSON.stringify(body);

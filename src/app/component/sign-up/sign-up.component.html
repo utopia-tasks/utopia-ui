@@ -1,0 +1,74 @@
+<mat-card>
+  <mat-card-header class="text-center">
+    <div class="header-text">
+      <mat-card-title>
+        <mat-icon class="app-icon p-4" [inline]="true">beenhere</mat-icon>
+      </mat-card-title>
+      <mat-card-subtitle>Utopia - One Task at a Time</mat-card-subtitle>
+    </div>
+  </mat-card-header>
+  <mat-card-content class="mt-4">
+    <mat-vertical-stepper [linear]="true" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Login Information</ng-template>
+          <div>
+            <mat-form-field>
+              <mat-label>Username</mat-label>
+              <input formControlName="username" matInput required>
+              <mat-icon matSuffix>person</mat-icon>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Password</mat-label>
+              <input formControlName="password" type="password" matInput required>
+              <mat-icon matSuffix>vpn_key</mat-icon>
+            </mat-form-field>
+          </div>
+          <div class="float-right">
+            <button mat-stroked-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Profile Information</ng-template>
+          <div>
+            <mat-form-field>
+              <mat-label>First Name</mat-label>
+              <input formControlName="firstName" matInput required>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Last Name</mat-label>
+              <input formControlName="lastName" matInput required>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input formControlName="email" matInput required>
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-stroked-button matStepperPrevious>Back</button>
+            <button class="float-right" mat-stroked-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <div class="mt-3">
+          <button mat-stroked-button matStepperPrevious>Back</button>
+          <button mat-raised-button class="float-right" color="primary" (click)="createUser()">Sign Up</button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+    <div class="ml-5 mr-5 mt-4 mb-3">
+      <button mat-stroked-button color="primary" [routerLink]="'/sign-in'">Already have an Account? Sign In Here</button>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,1 +1,36 @@
-<app-task-list *ngIf="loading == false" [toDos]="toDos"></app-task-list>
+<mat-drawer-container *ngIf="!userCookie">
+  <mat-drawer-content>
+    <mat-card class="center-content" *ngIf="router.url == '/sign-in'">
+      <mat-card-header class="text-center">
+        <div class="header-text">
+          <mat-card-title>
+            <mat-icon class="app-icon p-4" [inline]="true">beenhere</mat-icon>
+          </mat-card-title>
+          <mat-card-subtitle>Utopia - One Task at a Time</mat-card-subtitle>
+        </div>
+      </mat-card-header>
+      <mat-card-content class="mt-4">
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Username or Email</mat-label>
+            <input [(ngModel)]="user.username" matInput>
+            <mat-icon matSuffix>person</mat-icon>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input [(ngModel)]="user.password" type="password" matInput>
+            <mat-icon matSuffix>vpn_key</mat-icon>
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-stroked-button color="primary" [routerLink]="'/sign-up'">New? Sign Up Here</button>
+          <button mat-raised-button class="float-right" color="primary" (click)="signIn()">Sign In</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <app-sign-up class="center-content" *ngIf="router.url == '/sign-up'"></app-sign-up>
+  </mat-drawer-content>
+</mat-drawer-container>
+<app-menu *ngIf="userCookie"></app-menu>

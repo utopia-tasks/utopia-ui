@@ -1,0 +1,13 @@
+.header-text {
+  width: 100%;
+  margin-right: 32px;
+}
+
+.app-icon {
+  transform: scale(3);
+  color: #4527A0;
+}
+
+.mat-form-field {
+  width: 100%;
+}

@@ -14,24 +14,31 @@ import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { TodosService } from './service/todos/todos.service';
 import { MatListModule } from '@angular/material/list';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatNativeDateModule} from '@angular/material/core';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatNativeDateModule } from '@angular/material/core';
 import { StarredComponent } from './component/starred/starred.component';
 import { TaskListComponent } from './component/task-list/task-list.component';
-import { MenuComponent} from './component/menu/menu.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MenuComponent } from './component/menu/menu.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialogModule } from '@angular/material/dialog';
 import { AddTaskComponent } from './component/add-task/add-task.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DeadlinesComponent } from './component/deadlines/deadlines.component';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { UpcomingComponent } from './component/upcoming/upcoming.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ScanComponent } from './component/scan/scan.component';
 import { TaskCardComponent } from './component/task-card/task-card.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AllComponent } from './component/all/all.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { CookieService } from 'ngx-cookie-service';
+import { SignUpComponent } from './component/sign-up/sign-up.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { StartUpService } from './service/start-up/start-up.service';
+import { UserService } from './service/user/user.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +51,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     DeadlinesComponent,
     UpcomingComponent,
     ScanComponent,
-    TaskCardComponent
+    TaskCardComponent,
+    AllComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -68,9 +77,18 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatChipsModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDividerModule,
+    MatStepperModule
   ],
-  providers: [TodosService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [
+    TodosService,
+    StartUpService,
+    CookieService,
+    UserService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

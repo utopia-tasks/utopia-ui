@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TodosService } from '../../service/todos/todos.service';
-import { Todo } from '../../entity/todo';
-import { finalize } from 'rxjs/internal/operators';
-import {Record} from '../../entity/record';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { User } from '../../entity/user';
+import { StartUpService } from '../../service/start-up/start-up.service';
 
 @Component({
   selector: 'app-home',
@@ -11,36 +10,27 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  toDos: Todo[];
-  loading: boolean;
+  user: User;
+  userCookie: string;
+  sessionIdCookie: string;
 
-  constructor(private toDoService: TodosService) { }
-
-  ngOnInit(): void {
-    this.toDos = [];
-    this.loading = true;
-
-    this.toDoService.getToDos('0')
-      .pipe( finalize( () => this.loading = false))
-      .subscribe(res => {
-        this.toDoService.getPing().subscribe(res2 => {
-          console.log(res2);
-        });
-
-        this.toDos = res.records;
-        this.getMoreTodos(res);
-      });
+  constructor(public router: Router, private cookieService: CookieService, private startUpService: StartUpService) {
   }
 
-  getMoreTodos(record: Record) {
-    if (record.offset) {
-      this.toDoService.getToDos(record.offset)
-        .subscribe(res => {
-          this.toDos = this.toDos.concat(res.records);
-          this.getMoreTodos(res);
-        });
-    } else {
-      this.toDos = this.toDos.filter(toDo => toDo.fields.startDate <= new Date().toISOString() || !toDo.fields.startDate);
+  ngOnInit(): void {
+    this.startUpService.getPing().subscribe(res => {
+      console.log(res);
+    });
+    this.user = new User();
+    this.cookieService.set('token', 'password');
+    this.userCookie = this.cookieService.get('token');
+    // this.cookieService.set('sessionId','number');
+    if (this.userCookie) {
+      this.router.navigateByUrl('/all');
     }
+  }
+
+  signIn() {
+    this.router.navigateByUrl('/all');
   }
 }
